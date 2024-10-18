@@ -6,6 +6,7 @@ typedef struct
     float x, y, z;
 } vec3;
 
+void init_vec3(vec3 *v, float x, float y, float z);
 double v3x(vec3 v);
 double v3y(vec3 v);
 double v3z(vec3 v);

@@ -1,3 +1,4 @@
+#include "colour.h"
 #include "vec3.h"
 #include <stdio.h>
 
@@ -8,23 +9,17 @@ int main(void)
 
     printf("P3\n%d %d\n255\n", WIDTH, HEIGHT);
 
-    // Increment column
     for (int j = 0; j < HEIGHT; j++)
     {
         fprintf(stderr, "Scanlines remaining: %d\n", HEIGHT - j);
 
         for (int i = 0; i < WIDTH; i++)
         {
-            double r = (double)i / (WIDTH - 1);
-            double g = (double)j / (HEIGHT - 1);
-            double b = 0.0;
+            colour pixel_colour;
 
-            int ir = 255.999 * r;
-            int ig = 255.999 * g;
-            int ib = 255.999 * b;
+            init_vec3(&pixel_colour, (double)i / (WIDTH - 1), (double)j / (HEIGHT - 1), 0.0);
 
-            // Write out row
-            printf("%d %d %d\n", ir, ig, ib);
+            write_colour(pixel_colour);
         }
     }
 

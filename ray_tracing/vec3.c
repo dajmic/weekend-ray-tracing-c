@@ -1,6 +1,13 @@
 #include "vec3.h"
 #include <math.h>
 
+void init_vec3(vec3 *v, float x, float y, float z)
+{
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 double v3x(vec3 v) { return v.x; }
 
 double v3y(vec3 v) { return v.y; }
