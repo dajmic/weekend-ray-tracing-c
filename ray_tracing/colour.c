@@ -2,6 +2,13 @@
 #include "vec3.h"
 #include <stdio.h>
 
+void init_colour(colour *c, float r, float g, float b)
+{
+    c->x = r;
+    c->y = g;
+    c->z = b;
+}
+
 void write_colour(colour pixel_colour)
 {
     float r = pixel_colour.x;
