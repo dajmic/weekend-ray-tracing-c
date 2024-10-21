@@ -3,52 +3,78 @@
 #include "vec3.h"
 #include <stdio.h>
 
+colour ray_colour(ray r);
+
 int main(void)
 {
-    const float ASPECT_RATIO = 16.0 / 9.0;
-    const int IMAGE_WIDTH = 400;
+    float aspect_ratio = 16.0 / 9.0;
+    int image_width = 400;
 
     // Calculate image height based off width, ensure it's always >= 1
-    int image_height = IMAGE_WIDTH / ASPECT_RATIO;
+    int image_height = image_width / aspect_ratio;
     image_height = image_height < 1 ? 1 : image_height;
 
     // Camera
-    const point3 CAMERA_CENTRE;
-    init_point3(&CAMERA_CENTRE, 0.0, 0.0, 0.0);
-    const float FOCAL_LENGTH = 1.0;
-    const float VIEWPORT_HEIGHT = 2.0; // Arbitrary viewport height. Width is scaled to reach desired aspect ratio
-    const float VIEWPORT_WIDTH = VIEWPORT_HEIGHT * (IMAGE_WIDTH / image_height);
+    point3 camera_centre;
+    init_point3(&camera_centre, 0.0, 0.0, 0.0);
+    float focal_length = 1.0;
+    float viewport_height = 2.0; // Arbitrary viewport height. Width is scaled to reach desired aspect ratio
+    float viewport_width = viewport_height * (image_width / image_height);
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.
-    const vec3 VIEWPORT_U;
-    const vec3 VIEWPORT_V;
-    init_vec3(&VIEWPORT_U, VIEWPORT_WIDTH, 0.0, 0.0);
-    init_vec3(&VIEWPORT_V, 0.0, -VIEWPORT_HEIGHT, 0.0);
+    vec3 viewport_u;
+    vec3 viewport_v;
+    init_vec3(&viewport_u, viewport_width, 0.0, 0.0);
+    init_vec3(&viewport_v, 0.0, -viewport_height, 0.0);
 
     // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-    const vec3 PIXEL_DELTA_U = v3_scale(VIEWPORT_U, (1 / IMAGE_WIDTH));
-    const vec3 PIXEL_DELTA_V = v3_scale(VIEWPORT_V, (1 / image_height));
+    vec3 pixel_delta_u = v3_scale(viewport_u, (1 / image_width));
+    vec3 pixel_delta_v = v3_scale(viewport_v, (1 / image_height));
 
     // Calculate the location of the upper left pixel.
-    // auto viewport_upper_left = camera_center
-    //  - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
-    // auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+    point3 p_focal_length;
+    init_point3(&p_focal_length, 0.0, 0.0, focal_length);
 
-    printf("P3\n%d %d\n255\n", WIDTH, HEIGHT);
+    point3 focal_length_adjust = v3_subtract(camera_centre, p_focal_length);
+    point3 horizontal_adjust = v3_subtract(focal_length_adjust, v3_scale(viewport_u, 0.5));
+    point3 viewport_upper_left = v3_subtract(horizontal_adjust, v3_scale(viewport_v, 0.5));
+    point3 pixel_upper_left = v3_add(viewport_upper_left, v3_scale(v3_add(pixel_delta_u, pixel_delta_v), 0.5));
 
-    for (int j = 0; j < HEIGHT; j++)
+    printf("P3\n%d %d\n255\n", image_width, image_height);
+
+    for (int j = 0; j < image_height; j++)
     {
-        fprintf(stderr, "Scanlines remaining: %d\n", HEIGHT - j);
+        fprintf(stderr, "Scanlines remaining: %d\n", image_height - j);
 
-        for (int i = 0; i < WIDTH; i++)
+        for (int i = 0; i < image_width; i++)
         {
-            colour pixel_colour;
+            vec3 pixel_offset_u = v3_scale(pixel_delta_u, i);
+            vec3 pixel_offset_v = v3_scale(pixel_delta_v, j);
+            point3 pixel_centre = v3_add(pixel_upper_left, v3_add(pixel_offset_u, pixel_offset_v));
 
-            init_colour(&pixel_colour, (double)i / (WIDTH - 1), (double)j / (HEIGHT - 1), 0.0);
+            vec3 ray_direction = v3_subtract(pixel_centre, camera_centre);
 
+            ray r;
+            init_ray(&r, camera_centre, ray_direction);
+
+            colour pixel_colour = ray_colour(r);
             write_colour(pixel_colour);
         }
     }
 
     return 0;
+}
+
+colour ray_colour(ray r)
+{
+    vec3 unit_direction = v3_unit(r.direction);
+    float a = 0.5 * (unit_direction.y + 1.0);
+
+    colour white;
+    init_colour(&white, .4, 1.0, 1.0);
+
+    colour blue;
+    init_colour(&blue, 0.5, 0.7, 1.0);
+
+    return v3_add(v3_scale(white, (1.0 - a)), v3_scale(blue, a));
 }

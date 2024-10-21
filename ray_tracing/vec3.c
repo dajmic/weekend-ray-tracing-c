@@ -50,7 +50,10 @@ vec3 v3_scale(vec3 v, double scale)
     return v;
 }
 
-double v3_dot(vec3 v, vec3 u) { return (v.x * u.x) + (v.y * u.y) + (v.z * u.z); }
+double v3_dot(vec3 v, vec3 u)
+{
+    return (v.x * u.x) + (v.y * u.y) + (v.z * u.z);
+}
 
 vec3 v3_cross(vec3 v, vec3 u)
 {
