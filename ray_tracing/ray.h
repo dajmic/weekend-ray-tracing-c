@@ -13,8 +13,6 @@ typedef struct
 
 void init_point3(point3 *p, float x, float y, float z);
 void init_ray(ray *r, point3 origin, vec3 direction);
-point3 ray_origin(ray r);
-vec3 ray_direction(ray r);
 point3 ray_interpolate(ray r, double t);
 
 #endif
