@@ -11,8 +11,8 @@ typedef struct
     vec3 direction;
 } ray;
 
-void init_point3(point3 *p, float x, float y, float z);
-void init_ray(ray *r, point3 origin, vec3 direction);
+point3 init_p3(double x, double y, double z);
+ray init_ray(point3 origin, vec3 direction);
 point3 ray_interpolate(ray r, double t);
 
 #endif

@@ -2,18 +2,22 @@
 #include "vec3.h"
 #include <stdio.h>
 
-void init_colour(colour *c, float r, float g, float b)
+colour init_colour(double r, double g, double b)
 {
-    c->x = r;
-    c->y = g;
-    c->z = b;
+    colour c;
+
+    c.x = r;
+    c.y = g;
+    c.z = b;
+
+    return c;
 }
 
 void write_colour(colour pixel_colour)
 {
-    float r = pixel_colour.x;
-    float g = pixel_colour.y;
-    float b = pixel_colour.z;
+    double r = pixel_colour.x;
+    double g = pixel_colour.y;
+    double b = pixel_colour.z;
 
     // Translate the [0,1] component values to the byte range [0,255].
     int rbyte = 255.999 * r;

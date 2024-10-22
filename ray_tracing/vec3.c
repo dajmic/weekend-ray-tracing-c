@@ -1,11 +1,16 @@
 #include "vec3.h"
 #include <math.h>
+#include <stdio.h>
 
-void init_vec3(vec3 *v, float x, float y, float z)
+vec3 init_v3(double x, double y, double z)
 {
-    v->x = x;
-    v->y = y;
-    v->z = z;
+    vec3 v;
+
+    v.x = x;
+    v.y = y;
+    v.z = z;
+
+    return v;
 }
 
 double v3x(vec3 v) { return v.x; }
@@ -69,3 +74,8 @@ vec3 v3_cross(vec3 v, vec3 u)
 double v3_length(vec3 v) { return sqrt(v3_dot(v, v)); }
 
 vec3 v3_unit(vec3 v) { return v3_scale(v, 1 / v3_length(v)); }
+
+void v3_print(vec3 v)
+{
+    fprintf(stderr, "x: %f, y: %f, z: %f\n", v.x, v.y, v.z);
+}

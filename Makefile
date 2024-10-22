@@ -21,4 +21,4 @@ $(OBJDIR)vec3.o: $(SRCDIR)vec3.c $(SRCDIR)vec3.h
 	$(CC) $(CFLAGS) -c $(SRCDIR)vec3.c -o $(OBJDIR)vec3.o
 
 clean:
-	$(RM) $(OBJDIR)main $(OBJDIR)colour.o $(OBJDIR)vec3.o $(OBJDIR)main.dSYM
+	$(RM) $(OBJDIR)main $(OBJDIR)ray.o $(OBJDIR)colour.o $(OBJDIR)vec3.o $(OBJDIR)main.dSYM

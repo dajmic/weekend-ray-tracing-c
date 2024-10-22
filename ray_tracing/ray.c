@@ -2,17 +2,25 @@
 
 #include "vec3.h"
 
-void init_point3(point3 *p, float x, float y, float z)
+point3 init_p3(double x, double y, double z)
 {
-    p->x = x;
-    p->y = y;
-    p->z = z;
+    point3 p;
+
+    p.x = x;
+    p.y = y;
+    p.z = z;
+
+    return p;
 }
 
-void init_ray(ray *r, point3 origin, vec3 direction)
+ray init_ray(point3 origin, vec3 direction)
 {
-    r->origin = origin;
-    r->direction = direction;
+    ray r;
+
+    r.origin = origin;
+    r.direction = direction;
+
+    return r;
 }
 
 point3 ray_interpolate(ray r, double t) { return v3_add(r.origin, v3_scale(r.direction, t)); }
