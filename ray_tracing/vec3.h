@@ -13,7 +13,7 @@ double v3z(vec3 v);
 vec3 v3_add(vec3 v, vec3 u);
 vec3 v3_subtract(vec3 v, vec3 u);
 vec3 v3_multiply(vec3 v, vec3 u);
-vec3 v3_scale(vec3 v, double scale);
+vec3 v3_scale(vec3 v, float scale);
 double v3_dot(vec3 v, vec3 u);
 vec3 v3_cross(vec3 v, vec3 u);
 double v3_length(vec3 v);

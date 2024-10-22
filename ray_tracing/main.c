@@ -25,8 +25,8 @@ int main(void)
     vec3 viewport_v = init_v3(0.0, -viewport_height, 0.0);
 
     // Calculate the horizontal and vertical delta vectors from pixel to pixel.
-    vec3 pixel_delta_u = v3_scale(viewport_u, (1 / image_width));
-    vec3 pixel_delta_v = v3_scale(viewport_v, (1 / image_height));
+    vec3 pixel_delta_u = v3_scale(viewport_u, (1.0 / image_width));
+    vec3 pixel_delta_v = v3_scale(viewport_v, (1.0 / image_height));
 
     // Calculate the location of the upper left pixel.
     point3 p_focal_length = init_p3(0.0, 0.0, focal_length);
@@ -67,7 +67,7 @@ colour ray_colour(ray r)
 
     colour white = init_colour(1.0, 1.0, 1.0);
     colour white_gradient = v3_scale(white, (1.0 - a));
-    v3_print(white_gradient); // Not changing?
+
     colour blue = init_colour(0.5, 0.7, 1.0);
     colour blue_gradient = v3_scale(blue, a);
 

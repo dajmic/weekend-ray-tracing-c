@@ -46,7 +46,7 @@ vec3 v3_multiply(vec3 v, vec3 u)
     return v;
 }
 
-vec3 v3_scale(vec3 v, double scale)
+vec3 v3_scale(vec3 v, float scale)
 {
     v.x *= scale;
     v.y *= scale;
