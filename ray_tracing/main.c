@@ -1,8 +1,10 @@
 #include "colour.h"
 #include "ray.h"
 #include "vec3.h"
+#include <stdbool.h>
 #include <stdio.h>
 
+bool hit_sphere(point3 centre, double radius, ray r);
 colour ray_colour(ray r);
 
 int main(void)
@@ -18,7 +20,7 @@ int main(void)
     point3 camera_centre = init_p3(0.0, 0.0, 0.0);
     float focal_length = 1.0;
     float viewport_height = 2.0; // Arbitrary viewport height. Width is scaled to reach desired aspect ratio
-    float viewport_width = viewport_height * (image_width / image_height);
+    double viewport_width = viewport_height * ((double)image_width / image_height);
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.
     vec3 viewport_u = init_v3(viewport_width, 0.0, 0.0);
@@ -48,6 +50,7 @@ int main(void)
             vec3 pixel_offset_v = v3_scale(pixel_delta_v, j);
             point3 pixel_centre = v3_add(pixel_upper_left, v3_add(pixel_offset_u, pixel_offset_v));
 
+            // Currently camera_centre is at the origin, meaning the ray is directed to the centre of each pixel
             vec3 ray_direction = v3_subtract(pixel_centre, camera_centre);
 
             ray r = init_ray(camera_centre, ray_direction);
@@ -60,8 +63,25 @@ int main(void)
     return 0;
 }
 
+bool hit_sphere(point3 centre, double radius, ray r)
+{
+    vec3 oc = v3_subtract(centre, r.origin);
+    double a = v3_dot(r.direction, r.direction);
+    double b = -2.0 * v3_dot(r.direction, oc);
+    double c = v3_dot(oc, oc) - (radius * radius);
+    double discriminant = (b * b) - (4 * a * c);
+
+    return (discriminant >= 0);
+}
+
 colour ray_colour(ray r)
 {
+    if (hit_sphere(init_p3(0.0, 0.0, -1.0), 0.5, r))
+    {
+        return init_colour(1.0, 0.0, 0.0);
+    }
+
+    // Linearly interpolate (lerp) colours.
     vec3 unit_direction = v3_unit(r.direction);
     float a = 0.5 * (unit_direction.y + 1.0);
 
