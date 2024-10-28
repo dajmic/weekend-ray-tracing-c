@@ -1,10 +1,11 @@
 #include "colour.h"
 #include "ray.h"
 #include "vec3.h"
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-bool hit_sphere(point3 centre, double radius, ray r);
+double hit_sphere(point3 centre, double radius, ray r);
 colour ray_colour(ray r);
 
 int main(void)
@@ -63,7 +64,7 @@ int main(void)
     return 0;
 }
 
-bool hit_sphere(point3 centre, double radius, ray r)
+double hit_sphere(point3 centre, double radius, ray r)
 {
     vec3 oc = v3_subtract(centre, r.origin);
     double a = v3_dot(r.direction, r.direction);
@@ -71,14 +72,17 @@ bool hit_sphere(point3 centre, double radius, ray r)
     double c = v3_dot(oc, oc) - (radius * radius);
     double discriminant = (b * b) - (4 * a * c);
 
-    return (discriminant >= 0);
+    return discriminant < 0 ? -1.0 : (-b - sqrt(discriminant)) / (2.0 * a);
 }
 
 colour ray_colour(ray r)
 {
-    if (hit_sphere(init_p3(0.0, 0.0, -1.0), 0.5, r))
+    double t = hit_sphere(init_p3(0.0, 0.0, -1.0), 0.5, r);
+
+    if (t > 0.0)
     {
-        return init_colour(1.0, 0.0, 0.0);
+        vec3 normal = v3_unit(v3_subtract(ray_at(r, t), init_v3(0.0, 0.0, -1.0)));
+        return v3_scale(init_colour(normal.x + 1, normal.y + 1, normal.z + 1), 0.5);
     }
 
     // Linearly interpolate (lerp) colours.

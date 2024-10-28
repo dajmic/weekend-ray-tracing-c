@@ -23,4 +23,4 @@ ray init_ray(point3 origin, vec3 direction)
     return r;
 }
 
-point3 ray_interpolate(ray r, double t) { return v3_add(r.origin, v3_scale(r.direction, t)); }
+point3 ray_at(ray r, double t) { return v3_add(r.origin, v3_scale(r.direction, t)); }
