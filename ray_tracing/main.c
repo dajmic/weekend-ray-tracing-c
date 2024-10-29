@@ -67,12 +67,12 @@ int main(void)
 double hit_sphere(point3 centre, double radius, ray r)
 {
     vec3 oc = v3_subtract(centre, r.origin);
-    double a = v3_dot(r.direction, r.direction);
-    double b = -2.0 * v3_dot(r.direction, oc);
-    double c = v3_dot(oc, oc) - (radius * radius);
-    double discriminant = (b * b) - (4 * a * c);
+    double a = length_squared(r.direction);
+    double h = v3_dot(r.direction, oc);
+    double c = length_squared(oc) - (radius * radius);
+    double discriminant = (h * h) - (a * c);
 
-    return discriminant < 0 ? -1.0 : (-b - sqrt(discriminant)) / (2.0 * a);
+    return discriminant < 0 ? -1.0 : ((h - sqrt(discriminant)) / a);
 }
 
 colour ray_colour(ray r)
