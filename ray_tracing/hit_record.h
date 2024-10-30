@@ -6,7 +6,7 @@
 
 typedef struct
 {
-    point3 p;
+    point3 point;
     vec3 normal;
     double t;
 } hit_record;
