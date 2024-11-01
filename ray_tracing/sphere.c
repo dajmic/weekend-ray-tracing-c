@@ -13,12 +13,12 @@ sphere init_sphere(point3 centre, double radius)
     return s;
 }
 
-bool hit_sphere(sphere sphere, ray ray, double ray_tmin, double ray_tmax, hit_record hit_rec)
+bool hit_sphere(sphere s, ray r, double ray_tmin, double ray_tmax, hit_record hit_rec)
 {
-    vec3 oc = v3_subtract(sphere.centre, ray.origin);
-    double a = length_squared(ray.direction);
-    double h = v3_dot(ray.direction, oc);
-    double c = length_squared(oc) - (sphere.radius * sphere.radius);
+    vec3 oc = v3_subtract(s.centre, r.origin);
+    double a = length_squared(r.direction);
+    double h = v3_dot(r.direction, oc);
+    double c = length_squared(oc) - (s.radius * s.radius);
     double discriminant = (h * h) - (a * c);
 
     // Ray doesn't hit.
@@ -39,11 +39,11 @@ bool hit_sphere(sphere sphere, ray ray, double ray_tmin, double ray_tmax, hit_re
         {
             return false;
         }
+
+        hit_rec.t = root;
+        hit_rec.point = ray_at(r, hit_rec.t);
+        vec3 outward_normal = v3_scale(v3_subtract(hit_rec.point, s.centre), 1 / s.radius);
+        set_face_normal(&hit_rec, r, outward_normal);
+
+        return true;
     }
-
-    hit_rec.t = root;
-    hit_rec.point = ray_at(ray, hit_rec.t);
-    hit_rec.normal = v3_scale(v3_subtract(hit_rec.point, sphere.centre), 1 / sphere.radius);
-
-    return true;
-}

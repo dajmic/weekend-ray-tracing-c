@@ -75,6 +75,11 @@ double v3_length(vec3 v) { return sqrt(v3_dot(v, v)); }
 
 vec3 v3_unit(vec3 v) { return v3_scale(v, 1 / v3_length(v)); }
 
+vec3 v3_neg(vec3 v)
+{
+    return v3_scale(v, -1);
+}
+
 void v3_print(vec3 v)
 {
     fprintf(stderr, "x: %f, y: %f, z: %f\n", v.x, v.y, v.z);
