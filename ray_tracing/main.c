@@ -1,4 +1,5 @@
 #include "colour.h"
+#include "sphere.h"
 #include "ray.h"
 #include "vec3.h"
 #include <math.h>
@@ -8,7 +9,11 @@
 double hit_sphere(point3 centre, double radius, ray r);
 colour ray_colour(ray r);
 
-int main(void)
+/*
+TODO: Need to implement a sphere array. If a sphere is added re allocate memory.
+*/
+
+main(void)
 {
     float aspect_ratio = 16.0 / 9.0;
     int image_width = 400;

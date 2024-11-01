@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 sphere init_sphere(point3 centre, double radius)
 {
@@ -11,6 +12,19 @@ sphere init_sphere(point3 centre, double radius)
     s.radius = fmax(0.0, radius); // Avoid negative radius.
 
     return s;
+}
+
+void sphere_list_add(sphere_list *sl, sphere s)
+{
+    // If the number of spheres is at the list maximum, increment the max value and reallocate memory to fit new sphere.
+    if (sl->n == sl->max)
+    {
+        sl->max = sl->max ? 2 * sl->max : 1;
+        assert(sl->spheres = realloc(sl->spheres, sl->max * sizeof(*sl->spheres)));
+    }
+
+    // Add new sphere to list.
+    sl->spheres[sl->n++] = s;
 }
 
 bool hit_sphere(sphere s, ray r, double ray_tmin, double ray_tmax, hit_record hit_rec)
@@ -47,3 +61,4 @@ bool hit_sphere(sphere s, ray r, double ray_tmin, double ray_tmax, hit_record hi
 
         return true;
     }
+}
