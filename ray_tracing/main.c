@@ -2,16 +2,17 @@
 #include "sphere.h"
 #include "ray.h"
 #include "vec3.h"
+
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-double hit_sphere(point3 centre, double radius, ray r);
-colour ray_colour(ray r);
+const double PI = 3.1415926535897932385;
 
-/*
-TODO: Need to implement a sphere array. If a sphere is added re allocate memory.
-*/
+double degrees_to_radians(double degrees)
+{
+    return (degrees * PI) / 180.0;
+}
 
 main(void)
 {
@@ -27,6 +28,11 @@ main(void)
     float focal_length = 1.0;
     float viewport_height = 2.0; // Arbitrary viewport height. Width is scaled to reach desired aspect ratio
     double viewport_width = viewport_height * ((double)image_width / image_height);
+
+    // World
+    sphere_list world;
+    sphere_list_add(&world, init_sphere(init_p3(0.0, 0.0, -1.0), 0.5));
+    sphere_list_add(&world, init_sphere(init_p3(0.0, -100.5, -1.0), 100));
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.
     vec3 viewport_u = init_v3(viewport_width, 0.0, 0.0);
@@ -61,44 +67,10 @@ main(void)
 
             ray r = init_ray(camera_centre, ray_direction);
 
-            colour pixel_colour = ray_colour(r);
+            colour pixel_colour = ray_colour(r, &world);
             write_colour(pixel_colour);
         }
     }
 
     return 0;
-}
-
-double hit_sphere(point3 centre, double radius, ray r)
-{
-    vec3 oc = v3_subtract(centre, r.origin);
-    double a = length_squared(r.direction);
-    double h = v3_dot(r.direction, oc);
-    double c = length_squared(oc) - (radius * radius);
-    double discriminant = (h * h) - (a * c);
-
-    return discriminant < 0 ? -1.0 : ((h - sqrt(discriminant)) / a);
-}
-
-colour ray_colour(ray r)
-{
-    double t = hit_sphere(init_p3(0.0, 0.0, -1.0), 0.5, r);
-
-    if (t > 0.0)
-    {
-        vec3 normal = v3_unit(v3_subtract(ray_at(r, t), init_v3(0.0, 0.0, -1.0)));
-        return v3_scale(init_colour(normal.x + 1, normal.y + 1, normal.z + 1), 0.5);
-    }
-
-    // Linearly interpolate (lerp) colours.
-    vec3 unit_direction = v3_unit(r.direction);
-    float a = 0.5 * (unit_direction.y + 1.0);
-
-    colour white = init_colour(1.0, 1.0, 1.0);
-    colour white_gradient = v3_scale(white, (1.0 - a));
-
-    colour blue = init_colour(0.5, 0.7, 1.0);
-    colour blue_gradient = v3_scale(blue, a);
-
-    return v3_add(white_gradient, blue_gradient);
 }
