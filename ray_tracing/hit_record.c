@@ -1,5 +1,4 @@
 #include "hit_record.h"
-#include "ray.h"
 
 void set_face_normal(hit_record *hit_rec, ray r, vec3 outward_normal)
 {

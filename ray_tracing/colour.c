@@ -1,5 +1,5 @@
 #include "colour.h"
-#include "vec3.h"
+
 #include <stdio.h>
 
 colour init_colour(double r, double g, double b)

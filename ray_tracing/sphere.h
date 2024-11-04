@@ -19,7 +19,7 @@ typedef struct
 
 typedef struct
 {
-    struct sphere *spheres;
+    sphere *spheres;
     int n, max;
 } sphere_list;
 
