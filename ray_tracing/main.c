@@ -4,8 +4,8 @@
 #include "vec3.h"
 
 #include <math.h>
-#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 const double PI = 3.1415926535897932385;
 
@@ -14,7 +14,7 @@ double degrees_to_radians(double degrees)
     return (degrees * PI) / 180.0;
 }
 
-main(void)
+int main(void)
 {
     float aspect_ratio = 16.0 / 9.0;
     int image_width = 400;
@@ -31,8 +31,8 @@ main(void)
 
     // World
     sphere_list world;
-    sphere_list_add(&world, init_sphere(init_p3(0.0, 0.0, -1.0), 0.5));
     sphere_list_add(&world, init_sphere(init_p3(0.0, -100.5, -1.0), 100));
+    sphere_list_add(&world, init_sphere(init_p3(0.0, 0.0, -1.0), 0.5));
 
     // Calculate the vectors across the horizontal and down the vertical viewport edges.
     vec3 viewport_u = init_v3(viewport_width, 0.0, 0.0);
@@ -71,6 +71,8 @@ main(void)
             write_colour(pixel_colour);
         }
     }
+
+    free(world.spheres);
 
     return 0;
 }

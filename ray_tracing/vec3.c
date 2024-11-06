@@ -1,4 +1,5 @@
 #include "vec3.h"
+
 #include <math.h>
 #include <stdio.h>
 
@@ -72,6 +73,8 @@ vec3 v3_cross(vec3 v, vec3 u)
 }
 
 double v3_length(vec3 v) { return sqrt(v3_dot(v, v)); }
+
+double v3_length_squared(vec3 v) { return v3_dot(v, v); }
 
 vec3 v3_unit(vec3 v) { return v3_scale(v, 1 / v3_length(v)); }
 

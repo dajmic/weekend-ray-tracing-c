@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "colour.h": "c"
+    },
+    "makefile.configureOnOpen": false
+}
