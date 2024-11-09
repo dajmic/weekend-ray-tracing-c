@@ -64,11 +64,11 @@ bool hit_sphere(sphere s, ray r, interval t, hit_record *hit_rec)
     double sqrt_discriminant = sqrt(discriminant);
     double root = (h - sqrt_discriminant) / a;
 
-    if (root <= t.min || t.max <= root)
+    if (!surrounds(&t, root))
     {
         double root = (h + sqrt_discriminant) / a;
 
-        if (root <= t.min || t.max <= root)
+        if (!surrounds(&t, root))
         {
             return false;
         }

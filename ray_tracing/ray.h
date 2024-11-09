@@ -3,6 +3,7 @@
 
 #include "colour.h"
 #include "hit_record.h"
+#include "interval.h"
 #include "sphere.h"
 #include "vec3.h"
 

@@ -13,16 +13,6 @@ sphere init_sphere(point3 centre, double radius)
     return s;
 }
 
-interval init_interval(double min, double max)
-{
-    interval i;
-
-    i.min = min;
-    i.max = max;
-
-    return i;
-}
-
 void sphere_list_add(sphere_list *sl, sphere s)
 {
     // If the number of spheres is at the list maximum, increment the max value and reallocate memory to fit new sphere.
