@@ -7,18 +7,16 @@
 
 typedef struct
 {
-    float aspect_ratio;
-    int image_width;
-    int image_height;
-    float focal_length;
-    point3 camera_centre;
-    vec3 pixel_delta_u;
-    vec3 pixel_delta_v;
-    point3 pixel_upper_left;
+    float aspect_ratio, focal_length, pixel_samples_scale;
+    int image_width, image_height, samples_per_pixel;
+    point3 camera_centre, pixel_upper_left;
+    vec3 pixel_delta_u, pixel_delta_v;
 } camera;
 
 void render(camera *cam, sphere_list *world);
-static colour ray_colour(ray r, sphere_list *world);
 static void initialise(camera *cam);
+static colour ray_colour(ray r, sphere_list *world);
+static vec3 sample_square();
+static ray get_ray(camera *cam, int i, int j);
 
 #endif

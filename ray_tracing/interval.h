@@ -10,5 +10,6 @@ typedef struct
 
 interval init_interval(double min, double max);
 bool surrounds(interval *i, double x);
+double clamp(interval *i, double x);
 
 #endif

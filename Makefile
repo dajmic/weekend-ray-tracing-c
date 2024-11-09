@@ -9,8 +9,8 @@ default: all
 
 all: $(OBJDIR)main
 
-$(OBJDIR)main: $(OBJDIR)vec3.o $(OBJDIR)colour.o $(OBJDIR)sphere.o $(OBJDIR)interval.o $(OBJDIR)ray.o $(OBJDIR)camera.o 
-	$(CC) $(CFLAGS) -o $(OBJDIR)main $(SRCDIR)main.c $(OBJDIR)vec3.o $(OBJDIR)colour.o $(OBJDIR)sphere.o $(OBJDIR)interval.o $(OBJDIR)ray.o $(OBJDIR)camera.o -lm
+$(OBJDIR)main: $(OBJDIR)vec3.o $(OBJDIR)colour.o $(OBJDIR)sphere.o $(OBJDIR)interval.o $(OBJDIR)ray.o $(OBJDIR)camera.o $(OBJDIR)helper.o
+	$(CC) $(CFLAGS) -o $(OBJDIR)main $(SRCDIR)main.c $(OBJDIR)vec3.o $(OBJDIR)colour.o $(OBJDIR)sphere.o $(OBJDIR)interval.o $(OBJDIR)ray.o $(OBJDIR)camera.o $(OBJDIR)helper.o -lm
 
 $(OBJDIR)vec3.o: $(SRCDIR)vec3.c $(SRCDIR)vec3.h
 	$(CC) $(CFLAGS) -c $(SRCDIR)vec3.c -o $(OBJDIR)vec3.o
@@ -30,5 +30,7 @@ $(OBJDIR)ray.o: $(SRCDIR)ray.c $(SRCDIR)ray.h
 $(OBJDIR)camera.o: $(SRCDIR)camera.c $(SRCDIR)camera.h
 	$(CC) $(CFLAGS) -c $(SRCDIR)camera.c -o $(OBJDIR)camera.o
 
+$(OBJDIR)helper.o: $(SRCDIR)helper.c $(SRCDIR)helper.h
+	$(CC) $(CFLAGS) -c $(SRCDIR)helper.c -o $(OBJDIR)helper.o
 clean:
-	$(RM) $(OBJDIR)main $(OBJDIR)ray.o $(OBJDIR)interval.o $(OBJDIR)colour.o $(OBJDIR)vec3.o $(OBJDIR)camera.o $(OBJDIR)sphere.o $(OBJDIR)main.dSYM
+	$(RM) $(OBJDIR)main $(OBJDIR)ray.o $(OBJDIR)interval.o $(OBJDIR)colour.o $(OBJDIR)vec3.o $(OBJDIR)camera.o $(OBJDIR)sphere.o $(OBJDIR)helper.o $(OBJDIR)main.dSYM
