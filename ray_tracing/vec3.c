@@ -14,6 +14,17 @@ vec3 init_v3(double x, double y, double z)
     return v;
 }
 
+point3 init_p3(double x, double y, double z)
+{
+    point3 p;
+
+    p.x = x;
+    p.y = y;
+    p.z = z;
+
+    return p;
+}
+
 double v3x(vec3 v) { return v.x; }
 
 double v3y(vec3 v) { return v.y; }

@@ -9,6 +9,7 @@ typedef struct
 typedef vec3 point3;
 
 vec3 init_v3(double x, double y, double z);
+point3 init_p3(double x, double y, double z);
 double v3x(vec3 v);
 double v3y(vec3 v);
 double v3z(vec3 v);
