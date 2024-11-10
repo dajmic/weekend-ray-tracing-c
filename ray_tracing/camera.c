@@ -26,7 +26,7 @@ void render(camera *cam, sphere_list *world)
         {
             colour pixel_colour = init_colour(0.0, 0.0, 0.0);
 
-            for (int sample = 0; i < cam->samples_per_pixel; i++)
+            for (int sample = 0; sample < cam->samples_per_pixel; sample++)
             {
                 ray r = get_ray(cam, i, j);
                 pixel_colour = v3_add(pixel_colour, ray_colour(r, world));
