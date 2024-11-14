@@ -10,6 +10,10 @@ typedef vec3 point3;
 
 vec3 init_v3(double x, double y, double z);
 point3 init_p3(double x, double y, double z);
+vec3 init_v3_random();
+vec3 init_v3_random_in_range(double min, double max);
+vec3 random_unit_vector();
+vec3 random_on_hemisphere(vec3 normal);
 double v3x(vec3 v);
 double v3y(vec3 v);
 double v3z(vec3 v);

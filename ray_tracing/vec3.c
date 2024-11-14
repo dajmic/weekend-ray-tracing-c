@@ -1,5 +1,7 @@
 #include "vec3.h"
 
+#include "helper.h"
+
 #include <math.h>
 #include <stdio.h>
 
@@ -12,6 +14,44 @@ vec3 init_v3(double x, double y, double z)
     v.z = z;
 
     return v;
+}
+
+// For surface diffusion
+vec3 init_v3_random()
+{
+    return init_v3(random_double(), random_double(), random_double());
+}
+
+vec3 init_v3_random_in_range(double min, double max)
+{
+    return init_v3(random_double_in_range(min, max), random_double_in_range(min, max), random_double_in_range(min, max));
+}
+
+vec3 random_unit_vector()
+{
+    while (1)
+    {
+        vec3 p = init_v3_random_in_range(-1.0, 1.0);
+        double length_squared = v3_length_squared(p);
+
+        // Make sure unit vector lies within unit circle. If the random vec3 contains very small values, squaring this will result in 0 hence the first condition.
+        if (1.0E-160 < length_squared && length_squared <= 1.0)
+        {
+            return v3_scale(p, 1 / sqrt(length_squared));
+        }
+    }
+}
+
+vec3 random_on_hemisphere(vec3 normal)
+{
+    vec3 on_unit_sphere = random_unit_vector();
+
+    if (v3_dot(on_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal vector.
+    {
+        return on_unit_sphere;
+    }
+
+    return v3_neg(on_unit_sphere);
 }
 
 point3 init_p3(double x, double y, double z)

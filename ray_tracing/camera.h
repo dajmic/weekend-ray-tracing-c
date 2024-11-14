@@ -8,14 +8,14 @@
 typedef struct
 {
     float aspect_ratio, focal_length, pixel_samples_scale;
-    int image_width, image_height, samples_per_pixel;
+    int image_width, image_height, samples_per_pixel, max_depth;
     point3 camera_centre, pixel_upper_left;
     vec3 pixel_delta_u, pixel_delta_v;
 } camera;
 
-void render(camera *cam, sphere_list *world);
-static void initialise(camera *cam);
-static colour ray_colour(ray r, sphere_list *world);
+void render(sphere_list *world);
+camera init_cam();
+static colour ray_colour(ray r, int max_depth, sphere_list *world);
 static vec3 sample_square();
 static ray get_ray(camera *cam, int i, int j);
 
