@@ -3,14 +3,12 @@
 
 #include "vec3.h"
 
-typedef struct
-{
+typedef struct {
     point3 centre;
     double radius;
 } sphere;
 
-typedef struct
-{
+typedef struct {
     sphere *spheres;
     int n, max;
 } sphere_list;

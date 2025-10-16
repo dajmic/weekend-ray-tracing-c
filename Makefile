@@ -1,6 +1,5 @@
-
-CC      = gcc
-CFLAGS  = -g
+CC      = clang
+CFLAGS  = -std=c23 -g -Wall -Wextra -Wpedantic -Wshadow -Wstrict-prototypes -Wvla
 RM      = rm -rf
 OBJDIR  = build/
 SRCDIR  = ray_tracing/

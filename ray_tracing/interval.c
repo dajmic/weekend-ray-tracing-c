@@ -2,31 +2,29 @@
 
 interval init_interval(double min, double max)
 {
-    interval i;
+	interval i;
 
-    i.min = min;
-    i.max = max;
+	i.min = min;
+	i.max = max;
 
-    return i;
+	return i;
 }
 
 bool surrounds(interval *i, double x)
 {
-    return i->min < x && x < i->max;
+	return i->min < x && x < i->max;
 }
 
 double clamp(interval *i, double x)
 {
-    // Clamp value in interval range.
-    if (x < i->min)
-    {
-        return i->min;
-    }
+	// Clamp value in interval range.
+	if (x < i->min) {
+		return i->min;
+	}
 
-    if (x > i->max)
-    {
-        return i->max;
-    }
+	if (x > i->max) {
+		return i->max;
+	}
 
-    return x;
+	return x;
 }

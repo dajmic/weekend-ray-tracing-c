@@ -4,8 +4,7 @@
 
 #include <stdio.h>
 
-colour init_colour(double r, double g, double b)
-{
+colour init_colour(double r, double g, double b) {
     colour c;
 
     c.x = r;
@@ -15,8 +14,7 @@ colour init_colour(double r, double g, double b)
     return c;
 }
 
-void write_colour(colour pixel_colour)
-{
+void write_colour(colour pixel_colour) {
     double r = pixel_colour.x;
     double g = pixel_colour.y;
     double b = pixel_colour.z;

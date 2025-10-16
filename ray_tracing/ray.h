@@ -8,10 +8,9 @@
 
 #include <stdbool.h>
 
-typedef struct
-{
-    point3 origin;
-    vec3 direction;
+typedef struct {
+	point3 origin;
+	vec3 direction;
 } ray;
 
 ray init_ray(point3 origin, vec3 direction);
@@ -21,3 +20,4 @@ bool hit_sphere(sphere s, ray r, interval t, hit_record *hit_rec);
 void set_face_normal(hit_record *hit_rec, ray r, vec3 outward_normal);
 
 #endif
+
