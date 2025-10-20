@@ -9,15 +9,15 @@
 #include <stdbool.h>
 
 typedef struct {
-	point3 origin;
-	vec3 direction;
-} ray;
+	Point3 origin;
+	Vec3 direction;
+} Ray;
 
-ray init_ray(point3 origin, vec3 direction);
-point3 ray_at(ray r, double t);
-bool sphere_list_hit(sphere_list *sl, ray r, interval t, hit_record *hit_rec);
-bool hit_sphere(sphere s, ray r, interval t, hit_record *hit_rec);
-void set_face_normal(hit_record *hit_rec, ray r, vec3 outward_normal);
+Ray ray(Point3 origin, Vec3 direction);
+Point3 ray_at(Ray r, double t);
+bool sphere_list_hit(SphereList *sl, Ray r, Interval t, HitRecord *hit_rec);
+bool hit_sphere(Sphere s, Ray r, Interval t, HitRecord *hit_rec);
+void set_face_normal(HitRecord *hit_rec, Ray r, Vec3 outward_normal);
 
 #endif
 

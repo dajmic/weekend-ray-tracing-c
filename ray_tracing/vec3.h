@@ -3,29 +3,27 @@
 
 typedef struct {
 	double x, y, z;
-} vec3;
+} Vec3;
 
-typedef vec3 point3;
+typedef Vec3 Point3;
 
-vec3 init_v3(double x, double y, double z);
-point3 init_p3(double x, double y, double z);
-vec3 init_v3_random();
-vec3 init_v3_random_in_range(double min, double max);
-vec3 random_unit_vector();
-vec3 random_on_hemisphere(vec3 normal);
-double v3x(vec3 v);
-double v3y(vec3 v);
-double v3z(vec3 v);
-vec3 v3_neg(vec3 v);
-vec3 v3_add(vec3 v, vec3 u);
-vec3 v3_subtract(vec3 v, vec3 u);
-vec3 v3_multiply(vec3 v, vec3 u);
-vec3 v3_scale(vec3 v, float scale);
-double v3_dot(vec3 v, vec3 u);
-vec3 v3_cross(vec3 v, vec3 u);
-double v3_length(vec3 v);
-double v3_length_squared(vec3 v);
-vec3 v3_unit(vec3 v);
-void v3_print(vec3 v);
+Vec3 v3(double x, double y, double z);
+Point3 p3(double x, double y, double z);
+Vec3 v3_random();
+Vec3 v3_random_in_range(double min, double max);
+Vec3 random_unit_vector();
+Vec3 random_on_hemisphere(Vec3 normal);
+Vec3 v3_neg(Vec3 v);
+Vec3 v3_add(Vec3 v, Vec3 u);
+Vec3 v3_subtract(Vec3 v, Vec3 u);
+Vec3 v3_multiply(Vec3 v, Vec3 u);
+Vec3 v3_scale(Vec3 v, float scale);
+double v3_dot(Vec3 v, Vec3 u);
+Vec3 v3_cross(Vec3 v, Vec3 u);
+double v3_length(Vec3 v);
+double v3_length_squared(Vec3 v);
+Vec3 v3_unit(Vec3 v);
+void v3_print(Vec3 v);
 
 #endif
+

@@ -1,19 +1,19 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "vec3.h"
+#include "Vec3.h"
 
 typedef struct {
-    point3 centre;
-    double radius;
-} sphere;
+	Point3 centre;
+	double radius;
+} Sphere;
 
 typedef struct {
-    sphere *spheres;
-    int n, max;
-} sphere_list;
+	Sphere *spheres;
+	int n, max;
+} SphereList;
 
-sphere init_sphere(point3 centre, double radius);
-void sphere_list_add(sphere_list *sl, sphere s);
+Sphere sphere(Point3 centre, double radius);
+void sphere_list_add(SphereList *sl, Sphere s);
 
 #endif

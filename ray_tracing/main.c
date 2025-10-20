@@ -9,9 +9,9 @@
 int main(void)
 {
 	// World
-	sphere_list *world = malloc(sizeof *world);
-	sphere_list_add(world, init_sphere(init_p3(0.0, -100.5, -1.0), 100));
-	sphere_list_add(world, init_sphere(init_p3(0.0, 0.0, -1.0), 0.5));
+	SphereList *world = malloc(sizeof *world);
+	sphere_list_add(world, sphere(p3(0.0, -100.5, -1.0), 100));
+	sphere_list_add(world, sphere(p3(0.0, 0.0, -1.0), 0.5));
 
 	render(world);
 

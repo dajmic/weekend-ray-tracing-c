@@ -1,23 +1,18 @@
 #include "interval.h"
 
-interval init_interval(double min, double max)
+Interval interval(double min, double max)
 {
-	interval i;
-
-	i.min = min;
-	i.max = max;
-
-	return i;
+	return (Interval){ .min = min, .max = max };
 }
 
-bool surrounds(interval *i, double x)
+bool surrounds(Interval *i, double x)
 {
 	return i->min < x && x < i->max;
 }
 
-double clamp(interval *i, double x)
+double clamp(Interval *i, double x)
 {
-	// Clamp value in interval range.
+	// Clamp value in Interval range.
 	if (x < i->min) {
 		return i->min;
 	}

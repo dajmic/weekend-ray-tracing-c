@@ -5,12 +5,11 @@
 
 #include <stdbool.h>
 
-typedef struct
-{
-    point3 point;
-    vec3 normal;
-    double t;
-    bool front_face;
-} hit_record;
+typedef struct {
+	Point3 point;
+	Vec3 normal;
+	double t;
+	bool front_face;
+} HitRecord;
 
 #endif

@@ -3,17 +3,12 @@
 #include <math.h>
 #include <stdlib.h>
 
-sphere init_sphere(point3 centre, double radius)
+Sphere sphere(Point3 centre, double radius)
 {
-	sphere s;
-
-	s.centre = centre;
-	s.radius = fmax(0.0, radius); // Avoid negative radius.
-
-	return s;
+	return (Sphere){ .centre = centre, .radius = fmax(0.0, radius) };
 }
 
-void sphere_list_add(sphere_list *sl, sphere s)
+void sphere_list_add(SphereList *sl, Sphere s)
 {
 	// If the number of spheres is at the list maximum, increment the max value and reallocate memory to fit new sphere.
 	if (sl->n == sl->max) {

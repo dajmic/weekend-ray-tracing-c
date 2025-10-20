@@ -3,9 +3,9 @@
 
 #include "vec3.h"
 
-typedef vec3 colour;
+typedef Vec3 Colour;
 
-colour init_colour(double r, double g, double b);
-void write_colour(colour pixel_colour);
+Colour colour(double r, double g, double b);
+void write_colour(Colour pixel_colour);
 
 #endif
